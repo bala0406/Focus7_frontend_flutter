@@ -25,8 +25,8 @@ class Login extends StatelessWidget {
   //background vector image
   final Widget bgimage = SvgPicture.asset(
     bgName,
-    alignment: Alignment(0,-.23),
     fit: BoxFit.contain,
+    alignment: Alignment(1, -.35),
   );
 
   //Google vector image
@@ -43,7 +43,7 @@ class Login extends StatelessWidget {
           Container(
               alignment: Alignment(-0.65, 1),
               child: Text("Username",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600))),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500))),
           SizedBox(
             height: 5,
           ),
@@ -52,6 +52,7 @@ class Login extends StatelessWidget {
             child: Form(
               child: TextFormField(
                 decoration: InputDecoration(
+                    hintText: "Username",
                     filled: true,
                     fillColor: Color.fromRGBO(241, 241, 241, 1),
                     border: OutlineInputBorder(
@@ -72,7 +73,7 @@ class Login extends StatelessWidget {
           Container(
               alignment: Alignment(-0.65, 1),
               child: Text("Password",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600))),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500))),
           SizedBox(
             height: 5,
           ),
@@ -81,6 +82,8 @@ class Login extends StatelessWidget {
             child: Form(
               child: TextFormField(
                 decoration: InputDecoration(
+                  
+                    hintText: "Password",
                     filled: true,
                     fillColor: Color.fromRGBO(241, 241, 241, 1),
                     border: OutlineInputBorder(
@@ -97,9 +100,8 @@ class Login extends StatelessWidget {
 
   Widget forgotPassword() {
     return Container(
-      alignment: Alignment(0.6, 1),
+      alignment: Alignment(0.7, 1),
       child: FlatButton(
-        padding: EdgeInsets.all(0),
         onPressed: () {},
         child: GradientText(
           "Forgot Password?",
@@ -168,7 +170,6 @@ class Login extends StatelessWidget {
 
   Widget signUp() {
     return Container(
-      
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -198,42 +199,42 @@ class Login extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
-      body: Stack(
-        fit: StackFit.expand,
-        children: <Widget>[
-          bgimage,
-          Container(
-            alignment: Alignment.center,
-            child: Column(
+      body: SafeArea(
+        child: Stack(
+          // fit: StackFit.expand,
+          children: <Widget>[
+            bgimage,
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                SizedBox(height: 100),
-                logoimage,
-                SizedBox(
-                  height: 10,
+                Column(
+                  children: <Widget>[
+                    logoimage,
+                  ],
                 ),
-                userName(),
-                SizedBox(
-                  height: 20,
+                Column(children: <Widget>[
+                  userName(),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  password(),
+                ]),
+                Container(child: forgotPassword()),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    loginButton(),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    googleSignIn(),
+                    signUp()
+                  ],
                 ),
-                password(),
-                //NOTE no sized box added as both of their paddings made enough space
-                forgotPassword(),
-                SizedBox(
-                  height: 10,
-                ),
-                loginButton(),
-                SizedBox(
-                  height: 20,
-                ),
-                googleSignIn(),
-                SizedBox(
-                  height: 10,
-                ),
-                signUp()
               ],
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
