@@ -24,8 +24,7 @@ class Login extends StatelessWidget {
       );
 
   //background vector image
-  Widget bgImage(context) => SvgPicture.asset(bgName,
-      fit: BoxFit.contain, alignment: Alignment.center);
+  Widget bgImage(context) => SvgPicture.asset(bgName, fit: BoxFit.contain, alignment: Alignment.center);
 
   //Google vector image
   Widget googleLogo(context) => SvgPicture.asset(
@@ -41,32 +40,22 @@ class Login extends StatelessWidget {
           Container(
               alignment: Alignment(-0.68, 1),
               child: Text("Username",
-                  style: TextStyle(
-                      fontSize: SizeConfiguration.safeBlockHorizontal * 4,
-                      fontWeight: FontWeight.w500))),
+                  style: TextStyle(fontSize: SizeConfiguration.safeBlockHorizontal * 4, fontWeight: FontWeight.w500))),
           SizedBox(
             height: SizeConfiguration.safeBlockHorizontal * 1.3,
           ),
           Container(
-            padding: EdgeInsets.symmetric(
-                horizontal: SizeConfiguration.safeBlockHorizontal * 12),
+            padding: EdgeInsets.symmetric(horizontal: SizeConfiguration.safeBlockHorizontal * 12),
             child: Form(
               child: TextFormField(
-                style: TextStyle(
-                  fontSize: SizeConfiguration.safeBlockHorizontal * 3.5
-                ),
+                style: TextStyle(fontSize: SizeConfiguration.safeBlockHorizontal * 3.5),
                 decoration: InputDecoration(
                     hintText: "Username",
-                    
-                    hintStyle: TextStyle(
-                      fontSize: SizeConfiguration.safeBlockHorizontal * 3.5
-                    ),
+                    hintStyle: TextStyle(fontSize: SizeConfiguration.safeBlockHorizontal * 3.5),
                     filled: true,
                     fillColor: Color.fromRGBO(241, 241, 241, 1),
-                    border: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.circular(10))),
-                        textAlignVertical: TextAlignVertical.center,
+                    border: OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.circular(10))),
+                textAlignVertical: TextAlignVertical.center,
               ),
             ),
           ),
@@ -82,30 +71,21 @@ class Login extends StatelessWidget {
           Container(
               alignment: Alignment(-0.68, 1),
               child: Text("Password",
-                  style: TextStyle(
-                      fontSize: SizeConfiguration.safeBlockHorizontal * 4,
-                      fontWeight: FontWeight.w500))),
+                  style: TextStyle(fontSize: SizeConfiguration.safeBlockHorizontal * 4, fontWeight: FontWeight.w500))),
           SizedBox(
             height: SizeConfiguration.safeBlockHorizontal * 1.3,
           ),
           Container(
-            padding: EdgeInsets.symmetric(
-                horizontal: SizeConfiguration.safeBlockHorizontal * 12),
+            padding: EdgeInsets.symmetric(horizontal: SizeConfiguration.safeBlockHorizontal * 12),
             child: Form(
               child: TextFormField(
-                style: TextStyle(
-                  fontSize: SizeConfiguration.safeBlockHorizontal * 3.5
-                ),
+                style: TextStyle(fontSize: SizeConfiguration.safeBlockHorizontal * 3.5),
                 decoration: InputDecoration(
                     hintText: "Password",
-                    hintStyle: TextStyle(
-                      fontSize: SizeConfiguration.safeBlockHorizontal * 3.5
-                    ),
+                    hintStyle: TextStyle(fontSize: SizeConfiguration.safeBlockHorizontal * 3.5),
                     filled: true,
                     fillColor: Color.fromRGBO(241, 241, 241, 1),
-                    border: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.circular(10))),
+                    border: OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.circular(10))),
                 obscureText: true,
                 textAlignVertical: TextAlignVertical.center,
               ),
@@ -128,9 +108,7 @@ class Login extends StatelessWidget {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
-          style: TextStyle(
-              fontSize: SizeConfiguration.safeBlockHorizontal * 3.5,
-              fontWeight: FontWeight.w600),
+          style: TextStyle(fontSize: SizeConfiguration.safeBlockHorizontal * 3.5, fontWeight: FontWeight.w600),
         ),
       ),
     );
@@ -144,14 +122,10 @@ class Login extends StatelessWidget {
         },
         child: Text(
           "LOGIN",
-          style: TextStyle(
-              fontSize: SizeConfiguration.safeBlockHorizontal * 4,
-              fontWeight: FontWeight.w600),
+          style: TextStyle(fontSize: SizeConfiguration.safeBlockHorizontal * 4, fontWeight: FontWeight.w600),
         ),
         gradient: LinearGradient(
-            colors: [gradientColor1, gradientColor2],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight),
+            colors: [gradientColor1, gradientColor2], begin: Alignment.topLeft, end: Alignment.bottomRight),
         increaseHeightBy: SizeConfiguration.safeBlockVertical * 3.5,
         increaseWidthBy: SizeConfiguration.safeBlockHorizontal * 12,
         shapeRadius: BorderRadius.circular(10),
@@ -168,8 +142,7 @@ class Login extends StatelessWidget {
         horizontal: SizeConfiguration.safeBlockHorizontal * 20,
       ),
       child: MaterialButton(
-        padding: EdgeInsets.symmetric(
-            vertical: SizeConfiguration.safeBlockVertical * 2.3),
+        padding: EdgeInsets.symmetric(vertical: SizeConfiguration.safeBlockVertical * 2.3),
         color: googleSignInButtonColor,
         elevation: 0,
         focusElevation: 0,
@@ -184,9 +157,7 @@ class Login extends StatelessWidget {
             ),
             Text(
               "SIGN IN WITH GOOGLE",
-              style: TextStyle(
-                  fontSize: SizeConfiguration.safeBlockHorizontal * 3.5,
-                  fontWeight: FontWeight.w600),
+              style: TextStyle(fontSize: SizeConfiguration.safeBlockHorizontal * 3.5, fontWeight: FontWeight.w600),
             )
           ],
         ),
@@ -200,9 +171,7 @@ class Login extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text("Don't have an Account?",
-              style: TextStyle(
-                  fontSize: SizeConfiguration.safeBlockHorizontal * 3.5,
-                  fontWeight: FontWeight.w600)),
+              style: TextStyle(fontSize: SizeConfiguration.safeBlockHorizontal * 3.5, fontWeight: FontWeight.w600)),
           Container(
             child: FlatButton(
               padding: EdgeInsets.all(SizeConfiguration.safeBlockHorizontal * 1),
@@ -214,9 +183,7 @@ class Login extends StatelessWidget {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                 ),
-                style: TextStyle(
-                    fontSize: SizeConfiguration.safeBlockHorizontal * 3.5,
-                    fontWeight: FontWeight.w600),
+                style: TextStyle(fontSize: SizeConfiguration.safeBlockHorizontal * 3.5, fontWeight: FontWeight.w600),
               ),
             ),
           )
@@ -237,25 +204,21 @@ class Login extends StatelessWidget {
           children: <Widget>[
             bgImage(context),
             Column(
-              
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  logoImage(context),
-                  userName(context),
-                  SizedBox(
-                    height: SizeConfiguration.safeBlockHorizontal * 3,
-                  ),
-                  password(context),
-                  SizedBox(height: SizeConfiguration.safeBlockHorizontal * 5),
-                  loginButton(context),
-       
-                  forgotPassword(context),
-           
-                  googleSignIn(context),
-                  
-                  signUp(context),
-                ],
-              ),
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                logoImage(context),
+                userName(context),
+                SizedBox(
+                  height: SizeConfiguration.safeBlockHorizontal * 3,
+                ),
+                password(context),
+                SizedBox(height: SizeConfiguration.safeBlockHorizontal * 5),
+                loginButton(context),
+                forgotPassword(context),
+                googleSignIn(context),
+                signUp(context),
+              ],
+            ),
           ],
         ),
       ),
