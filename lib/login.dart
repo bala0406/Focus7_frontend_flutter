@@ -198,6 +198,7 @@ class Login extends StatelessWidget {
     SizeConfiguration.init(context);
 
     return Scaffold(
+      
       body: SafeArea(
         child: Stack(
           // fit: StackFit.expand,
@@ -217,7 +218,7 @@ class Login extends StatelessWidget {
                 forgotPassword(context),
                 googleSignIn(context),
                 signUp(context),
-              ],
+              ] ,
             ),
           ],
         ),
