@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:focus7/styles.dart';
+import 'package:focus7/timer.dart';
 import 'login.dart';
-import 'question_display.dart';
+import 'question_view.dart';
 
 void main() => runApp(MyApp());
 
@@ -10,10 +12,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Flutter Demo',
-        home: Login(),
+        home: Timer(),
         theme: ThemeData(
           fontFamily: "Roboto regular",
-          
         ));
   }
 }
