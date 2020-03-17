@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:focus7/question.dart';
+import 'package:focus7/timer.dart';
 import 'styles.dart';
 
 
@@ -8,12 +10,32 @@ class QuestionDisplay extends StatefulWidget {
 }
 
 class _QuestionDisplayState extends State<QuestionDisplay> {
+
+
+
+  Widget previousNextButton()
+  {
+    return Row(
+      children: <Widget>[
+        MaterialButton(onPressed: (){},
+        )
+      ],
+
+    );
+    
+  } 
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Styles.primaryDarkBlue,
+      
       body: SafeArea(child: 
       Column(children: <Widget>[
+        Timer(),
+        Question(),
+        previousNextButton()
         
       ],)),
       

@@ -19,8 +19,8 @@ class _TimerState extends State<Timer> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    controller = AnimationController(vsync: this, duration: Duration(seconds: 10));
-    animation = Tween<double>(begin: 0.06, end: 1).animate(controller);
+    controller = AnimationController(vsync: this, duration: Duration(minutes: 7));
+    animation = Tween<double>(begin: 0.1, end: 1).animate(controller);
     controller.forward();
   }
 
@@ -36,49 +36,47 @@ class _TimerState extends State<Timer> with SingleTickerProviderStateMixin {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
 
-    return Scaffold(
-        backgroundColor: Styles.primaryDarkBlue,
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(10),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Expanded(
-                  flex: 5,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: AnimatedBuilder(
-                        animation: controller,
-                        builder: (context, child) {
-                          return CustomPaint(painter: TimerBar(animation: animation, height: height));
-                        }),
-                  ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: AnimatedBuilder(
-                        animation: controller,
-                        builder: (context, child) {
-                          return Text(
-                            timerString,
-                            style: TextStyle(fontSize: 24, color: Styles.primaryWhite),
-                          );
-                        }),
-                  ),
-                )
-              ],
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              flex: 5,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: AnimatedBuilder(
+                    animation: controller,
+                    builder: (context, child) {
+                      return CustomPaint(painter: TimerBar(animation: animation, height: height));
+                    }),
+              ),
             ),
-          ),
-        ));
+            Expanded(
+              flex: 1,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: AnimatedBuilder(
+                    animation: controller,
+                    builder: (context, child) {
+                      return Text(
+                        timerString,
+                        style: Theme.of(context).textTheme.display1,
+                      );
+                    }),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
 
 class TimerBar extends CustomPainter {
   final Gradient gradient = Styles.primaryGradient;
-  final Color timerBarColor = Styles.primaryBlue;
+  final Color timerBarColor = Styles.primaryLightBlue;
   final Animation animation;
   final double width;
   final double height;
@@ -91,7 +89,7 @@ class TimerBar extends CustomPainter {
       ..color = timerBarColor
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 10;
+      ..strokeWidth = 5;
 
     Rect rect = new Rect.fromLTWH(0, 0, size.width, height / 25);
 
@@ -109,8 +107,8 @@ class TimerBar extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
+  bool shouldRepaint(TimerBar oldDelegate) {
     // TODO: implement shouldRepaint
-    return false;
+    return animation != oldDelegate.animation || height != oldDelegate.height;
   }
 }
