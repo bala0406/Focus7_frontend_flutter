@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:loading/loading.dart';
+import 'package:loading/indicator/ball_pulse_indicator.dart';
+import 'Models/question_model.dart';
+import 'Services/question_Service.dart';
 
 class Question extends StatefulWidget {
   @override
@@ -6,7 +10,6 @@ class Question extends StatefulWidget {
 }
 
 class _QuestionState extends State<Question> {
-
   Widget questionCount() {
     return Padding(
       padding: const EdgeInsets.all(18.0),
@@ -22,11 +25,11 @@ class _QuestionState extends State<Question> {
     );
   }
 
-  Widget questionview() {
+  Widget questionview({String question}) {
     return Padding(
       padding: const EdgeInsets.all(18.0),
       child: Text(
-        "The synthesis of alkyl fluorides is best accomplished by",
+        question,
         style: Theme.of(context).textTheme.display1,
       ),
     );
@@ -48,6 +51,9 @@ class _QuestionState extends State<Question> {
             borderRadius: BorderRadius.circular(20.0),
             splashColor: Theme.of(context).primaryColorDark,
             onTap: () {
+              setState(() {
+                disabledColor = Theme.of(context).primaryColorDark;
+              });
             },
             child: Container(
               alignment: Alignment.centerLeft,
@@ -62,15 +68,26 @@ class _QuestionState extends State<Question> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        questionCount(),
-        questionview(),
-        option(option: "Free radical fluorination"),
-        option(option: "Sandmeyer's reaction"),
-        option(option: "Finkelstein reaction"),
-        option(option: "Swarts reaction")
-      ],
+    return SingleChildScrollView(
+      child: FutureBuilder(
+          future: QuestionService().getQuestions(),
+          builder: (context, snapshot) {
+            List<QuestionModel> data = snapshot.data;
+            if (data != null) {
+              return Column(
+                children: <Widget>[
+                  questionCount(),
+                  questionview(question: data[1].question),
+                  option(option: data[1].option_1),
+                  option(option: data[1].option_2),
+                  option(option: data[1].option_3),
+                  option(option: data[1].option_4)
+                ],
+              );
+            } else {
+              return Center(child: Loading(indicator: BallPulseIndicator()));
+            }
+          }),
     );
   }
 }
