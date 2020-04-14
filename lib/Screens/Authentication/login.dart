@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:focus7/Configurations/size_config.dart';
 import 'package:gradient_text/gradient_text.dart';
 import 'package:gradient_widgets/gradient_widgets.dart' as widgetGradient;
-import 'size_config.dart';
+
 
 class Login extends StatelessWidget {
   //gradient colors

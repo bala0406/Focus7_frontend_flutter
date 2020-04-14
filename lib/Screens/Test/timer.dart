@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:focus7/Configurations/styles.dart';
 
-import 'package:focus7/styles.dart';
+
 
 class Timer extends StatefulWidget {
   @override
@@ -76,7 +77,7 @@ class _TimerState extends State<Timer> with SingleTickerProviderStateMixin {
 
 class TimerBar extends CustomPainter {
   final Gradient gradient = Styles.primaryGradient;
-  final Color timerBarColor = Styles.primaryLightBlue;
+  final Color timerBarColor = Styles.primaryColor;
   final Animation animation;
   final double width;
   final double height;
