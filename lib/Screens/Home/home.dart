@@ -1,10 +1,13 @@
+////////////////////////////////////////////////////////////////////
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:focus7/Configurations/styles.dart';
 
+////////////////////////////////////////////////////////////////////
+import 'package:focus7/Configurations/styles.dart';
 import 'package:focus7/Screens/Home/Dashboard/dashboard.dart';
 import 'package:focus7/Screens/Home/Forums/forums.dart';
 import 'package:focus7/Screens/Home/Profile/profile.dart';
+///////////////////////////////////////////////////////////////////
 
 class Home extends StatefulWidget {
   @override
@@ -45,16 +48,22 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             },
             items: [
               BottomNavigationBarItem(
-                  activeIcon: IconGradientMask(child: Icon(Icons.dashboard,size: selectedIconSize,)),
+                  activeIcon: IconGradientMask(
+                      child: Icon(
+                    Icons.dashboard,
+                    size: selectedIconSize,
+                  )),
                   icon: Icon(Icons.dashboard),
                   title: Text("Dashboard")),
               BottomNavigationBarItem(
-                  activeIcon: IconGradientMask(child: Icon(Icons.forum,size: selectedIconSize)),
+                  activeIcon: IconGradientMask(
+                      child: Icon(Icons.forum, size: selectedIconSize)),
                   icon: Icon(Icons.forum),
                   title: Text("Forums")),
               BottomNavigationBarItem(
-                  activeIcon:
-                      IconGradientMask(child: Icon(Icons.account_circle,size: selectedIconSize)),
+                  activeIcon: IconGradientMask(
+                      child:
+                          Icon(Icons.account_circle, size: selectedIconSize)),
                   icon: Icon(Icons.account_circle),
                   title: Text("Profile"))
             ]),
@@ -65,16 +74,19 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
 class IconGradientMask extends StatelessWidget {
   final Widget child;
+  final double iconSize = 26;
   IconGradientMask({this.child});
 
   @override
   Widget build(BuildContext context) {
     return ShaderMask(
       shaderCallback: (bounds) => LinearGradient(
-        colors: Styles.primaryGradient.colors,
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      ).createShader(bounds),
+              colors: Styles.primaryGradient.colors,
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              tileMode: TileMode.mirror,
+              stops: [0.3, 0.8])
+          .createShader(Rect.fromLTWH(0, 0, iconSize, iconSize)),
       blendMode: BlendMode.srcIn,
       child: child,
     );

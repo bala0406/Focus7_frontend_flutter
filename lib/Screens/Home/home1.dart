@@ -11,7 +11,6 @@ import 'package:focus7/Screens/Home/Dashboard/dashboard.dart';
 import 'package:focus7/Screens/Home/Forums/forums.dart';
 import 'package:focus7/Screens/Home/Profile/profile.dart';
 
-import 'package:focus7/Screens/Home/gradient_icon.dart';
 
 class Home1 extends StatefulWidget {
   @override
@@ -65,6 +64,28 @@ class _HomeState extends State<Home1> with TickerProviderStateMixin {
               ),
             ]),
       ),
+    );
+  }
+}
+
+
+class IconGradientMask extends StatelessWidget {
+  final Widget child;
+  IconGradientMask({this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    return ShaderMask(
+      shaderCallback: (bounds) => LinearGradient(
+        colors: Styles.primaryGradient.colors,
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        tileMode: TileMode.mirror,
+        stops: [0.3,0.8]
+      ).createShader(bounds),
+      blendMode: BlendMode.srcIn,
+      
+      child: child,
     );
   }
 }
