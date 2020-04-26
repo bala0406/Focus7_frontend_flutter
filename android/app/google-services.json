@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "761321056320",
+    "firebase_url": "https://focus7-9f1a6.firebaseio.com",
+    "project_id": "focus7-9f1a6",
+    "storage_bucket": "focus7-9f1a6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:761321056320:android:63edd767294b8eadf717a5",
+        "android_client_info": {
+          "package_name": "com.firelyfreeze.focus7"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "761321056320-9pna744n988grsvnv660if8e6sc26ra2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbKvZTvK_50KmXt6wWE4FQXLqp0SI0-U4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "761321056320-9pna744n988grsvnv660if8e6sc26ra2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

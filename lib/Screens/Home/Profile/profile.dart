@@ -25,70 +25,71 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.only(top: 40),
-          child: Align(alignment: Alignment.centerRight, child: SettingsIcon()),
-        ),
-        SizedBox(height: 30),
-        Align(
-            alignment: Alignment.center,
-            child: CircleAvatar(
-              radius: 60,
-              backgroundColor: Colors.amber,
-              backgroundImage: AssetImage("Assets/ninja_image_png.png"),
-            )),
-        SizedBox(height: 15),
-        Text(
-          "Bala Ganesh",
-          style: Styles.titleWhiteTextStyle,
-        ),
-        SizedBox(height: 20),
-        IntrinsicHeight(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Column(
-                children: <Widget>[
-                  level,
-                  SizedBox(height: 10),
-                  Text(
-                    "4",
-                    style: Styles.titleWhiteTextStyle,
-                  ),
-                ],
-              ),
-              VerticalDivider(
-                color: Styles.primaryColor,
-                thickness: 3,
-              ),
-              Column(
-                children: <Widget>[
-                  fpoints,
-                  SizedBox(height: 10),
-                  Text(
-                    "250",
-                    style: Styles.titleWhiteTextStyle,
-                  ),
-                ],
-              ),
-            ],
+    return SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(top: 40),
+            child: Align(alignment: Alignment.centerRight, child: SettingsIcon()),
           ),
-        ),
-        SizedBox(height: 20),
-        NotificationContainer(
-          text: "Test History",
-          image: "Assets/test_history_icon.svg",
-          onTap: () {},
-        ),
-        SizedBox(height: 20),
-        NotificationContainer(
-          text: "Analytics",
-          image: "Assets/analytics_icon.svg",
-          onTap: () {},
-        ),
-      ],
+          SizedBox(height: 30),
+          CircleAvatar(
+            radius: 60,
+            backgroundColor: Colors.amber,
+            backgroundImage: AssetImage("Assets/ninja_image_png.png"),
+          ),
+          SizedBox(height: 15),
+          Text(
+            "Bala Ganesh",
+            style: Styles.titleWhiteTextStyle,
+          ),
+          SizedBox(height: 20),
+          IntrinsicHeight(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Column(
+                  children: <Widget>[
+                    level,
+                    SizedBox(height: 10),
+                    Text(
+                      "4",
+                      style: Styles.titleWhiteTextStyle,
+                    ),
+                  ],
+                ),
+                VerticalDivider(
+                  color: Styles.primaryColor,
+                  thickness: 3,
+                ),
+                Column(
+                  children: <Widget>[
+                    fpoints,
+                    SizedBox(height: 10),
+                    Text(
+                      "250",
+                      style: Styles.titleWhiteTextStyle,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 20),
+          NotificationContainer(
+            text: "Test History",
+            image: "Assets/test_history_icon.svg",
+            onTap: () {},
+          ),
+          SizedBox(height: 20),
+          NotificationContainer(
+            text: "Analytics",
+            image: "Assets/analytics_icon.svg",
+            onTap: () {},
+          ),
+        ],
+      ),
     );
   }
 }

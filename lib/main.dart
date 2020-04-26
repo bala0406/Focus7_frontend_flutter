@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 ////////////////////////////////////////////////////////////////////
 import 'package:focus7/Configurations/styles.dart';
+import 'package:focus7/Screens/Authentication/sign_in.dart';
 import 'package:focus7/Screens/Home/home.dart';
 import 'package:focus7/Screens/Home/home1.dart';
 import 'package:focus7/Screens/Test/question_display.dart';

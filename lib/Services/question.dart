@@ -5,7 +5,7 @@ import 'package:focus7/Models/question_model.dart';
 import 'package:http/http.dart' as http;
 
 class QuestionService {
-  List<QuestionModel> question;
+  List<QuestionModel> questions;
 
   String _url = "https://focus7-stage.herokuapp.com/api/getquestions";
 
@@ -13,8 +13,8 @@ class QuestionService {
     http.Response response = await http.get(_url);
 
     List collection = jsonDecode(response.body);
-    question = collection.map((json) => QuestionModel.fromJson(json)).toList();
+    questions = collection.map((json) => QuestionModel.fromJson(json)).toList();
 
-    return question;
+    return questions;
   }
 }

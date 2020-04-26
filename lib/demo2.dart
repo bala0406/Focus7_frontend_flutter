@@ -9,24 +9,62 @@ import 'package:focus7/Configurations/styles.dart';
 class Demo2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
-    return Scaffold(
-          body: Row(
-  mainAxisSize: MainAxisSize.min,
-  children: <Widget>[
-      Container(
-        child: Text('Item1')
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
+        
+          
+          children: <Widget>[
+            Align(
+              alignment: Alignment.center,
+                          child: Wrap(
+                  alignment: WrapAlignment.center,
+                  direction: Axis.horizontal,
+                  spacing: 20,
+                  runSpacing: 20,
+                  
+                  children: <Widget>[
+                    Container(
+              color: Colors.amber,
+              height: 180,
+              width: 180,
+              child: Text(
+                "bala",
+                style: Styles.headlineWhiteTextStyle,
+              )),
+                    
+                    Container(
+              height: 180,
+              width: 180,
+              color: Colors.amber,
+              child: Text(
+                "bala",
+                style: Styles.headlineWhiteTextStyle,
+              )),
+              Container(
+                  color: Colors.amber,
+                  height: 180,
+                  width: 180,
+                  child: Text(
+                    "bala",
+                    style: Styles.headlineWhiteTextStyle,
+                  )),
+              
+              Container(
+                  height: 180,
+                  width: 180,
+                  color: Colors.amber,
+                  child: Text(
+                    "bala",
+                    style: Styles.headlineWhiteTextStyle,
+                  )),
+                    
+                  ],
+                ),
+            ),
+          ],
+        ),
       ),
-      VerticalDivider(color: Colors.red,thickness: 20,width: 20,),
-      Container(
-        child: Text('Item2'),
-      ),
-      VerticalDivider(),
-      Container(
-        child: Text('Item3'),
-      ),
-  ],
-),
     );
   }
 }

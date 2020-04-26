@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:focus7/Configurations/styles.dart';
 
-
-
 class Timer extends StatefulWidget {
   @override
   _TimerState createState() => _TimerState();
@@ -20,96 +18,94 @@ class _TimerState extends State<Timer> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    controller = AnimationController(vsync: this, duration: Duration(minutes: 7));
+    controller =
+        AnimationController(vsync: this, duration: Duration(minutes: 7));
     animation = Tween<double>(begin: 0.1, end: 1).animate(controller);
-    controller.forward();
+    controller.forward(from: controller.value);
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     controller.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
-
     return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Expanded(
-              flex: 5,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Expanded(
+            flex: 4,
+            child: Transform.translate(
+              offset: Offset(0, -15), //Size(0,-30).center(Offset.zero)
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.only(top: 20, left: 20),
                 child: AnimatedBuilder(
                     animation: controller,
                     builder: (context, child) {
-                      return CustomPaint(painter: TimerBar(animation: animation, height: height));
+                      return CustomPaint(
+                          painter: TimerBar(animation: animation));
                     }),
               ),
             ),
-            Expanded(
-              flex: 1,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: AnimatedBuilder(
-                    animation: controller,
-                    builder: (context, child) {
-                      return Text(
-                        timerString,
-                        style: Theme.of(context).textTheme.display1,
-                      );
-                    }),
-              ),
-            )
-          ],
-        ),
+          ),
+          Expanded(
+            flex: 1,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: AnimatedBuilder(
+                  animation: controller,
+                  builder: (context, child) {
+                    return Text(
+                      timerString,
+                      style: Styles.timerTextStyle,
+                      textAlign: TextAlign.center,
+                    );
+                  }),
+            ),
+          ),
+        ],
       ),
     );
   }
 }
 
+// paints the animated Timer Bar to the screen
 class TimerBar extends CustomPainter {
   final Gradient gradient = Styles.primaryGradient;
   final Color timerBarColor = Styles.primaryColor;
   final Animation animation;
-  final double width;
-  final double height;
 
-  TimerBar({this.width, this.height, this.animation}) : super(repaint: animation);
+  TimerBar({this.animation}) : super(repaint: animation);
 
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint = new Paint()
       ..color = timerBarColor
-      ..strokeCap = StrokeCap.round
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 5;
+      ..style = PaintingStyle.fill;
 
-    Rect rect = new Rect.fromLTWH(0, 0, size.width, height / 25);
+    //background painter
+    Rect rect = new Rect.fromLTWH(0, 0, size.width, 30);
 
-    RRect rrectBorder = new RRect.fromRectAndRadius(rect, Radius.circular(50));
-    canvas.drawRRect(rrectBorder, paint);
+    RRect rrectContainer =
+        new RRect.fromRectAndRadius(rect, Radius.circular(50));
+    canvas.drawRRect(rrectContainer, paint);
 
-    paint.style = PaintingStyle.fill;
-    paint.strokeWidth = 0;
+    // foreground animated painter
     paint.shader = gradient.createShader(rect);
 
-    Rect rectAnim = new Rect.fromLTWH(0, 0, size.width * animation.value, height / 25);
+    Rect rectAnim = new Rect.fromLTWH(0, 0, size.width * animation.value, 30);
     RRect rrect = new RRect.fromRectAndRadius(rectAnim, Radius.circular(50));
 
     canvas.drawRRect(rrect, paint);
   }
 
+  //animation callback
   @override
   bool shouldRepaint(TimerBar oldDelegate) {
-    // TODO: implement shouldRepaint
-    return animation != oldDelegate.animation || height != oldDelegate.height;
+    return animation != oldDelegate.animation;
   }
 }

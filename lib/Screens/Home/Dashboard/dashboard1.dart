@@ -5,13 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 ////////////////////////////////////////////////////////////////////
 import 'package:focus7/Configurations/styles.dart';
-import 'package:focus7/Models/question_model.dart';
-import 'package:focus7/Screens/Test/focus_test_loading.dart';
-import 'package:focus7/Screens/Test/question_display.dart';
-import 'package:focus7/Services/question.dart';
 import 'package:focus7/Widgets/settings.dart';
 import 'package:gradient_text/gradient_text.dart';
-import 'package:loading/loading.dart';
 ////////////////////////////////////////////////////////////////////
 
 class Dashboard extends StatefulWidget {
@@ -20,11 +15,11 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-  QuestionService questionService = QuestionService();
-  List<QuestionModel> questions;
-
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
       dragStartBehavior: DragStartBehavior.start,
@@ -98,10 +93,7 @@ class _DashboardState extends State<Dashboard> {
           text: "Focus Test",
           image: "Assets/focus_icon.svg",
           time: "7 minutes",
-          onTap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => FocusTestLoading()));
-          },
+          onTap: () {},
         ),
         SizedBox(height: 15),
         NotificationContainer(

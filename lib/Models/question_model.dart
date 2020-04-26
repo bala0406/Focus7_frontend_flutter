@@ -1,4 +1,6 @@
+
 class QuestionModel {
+  // final subjectName;
   final chapterName;
   final question;
   final option_1;
