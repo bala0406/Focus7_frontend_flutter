@@ -5,11 +5,9 @@ class Forums extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-          child: Text(
-        "Forums",
-        style: Styles.headlineWhiteTextStyle,
-      )),
+      body: Center(child: FittedBox(
+        fit: BoxFit.contain,
+        child: Image.asset("Assets/under_construction.png"))),
     );
   }
 }

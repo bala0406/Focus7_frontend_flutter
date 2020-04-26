@@ -86,59 +86,7 @@ class _QuestionState extends State<Question> {
           children: <Widget>[
             Timer(),
             SizedBox(height: 40),
-            Expanded(
-                child: PageView.builder(
-              itemCount: widget.questions.length ?? 0,
-              itemBuilder: (context, index) {
-                return SingleChildScrollView(
-                  child: Column(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: <Widget>[
-                            Text(
-                              "Question  ${index + 1} / ",
-                              style: Styles.questionNumberTextStyle,
-                            ),
-                            Text(
-                              "7",
-                              style: Styles.questionNumberTextStyle
-                                  .copyWith(fontSize: 20),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: 20),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Text(
-                          widget.questions[index].question,
-                          style: Styles.questionTextStyle,
-                          textAlign: TextAlign.left,
-                        ),
-                      ),
-                      SizedBox(height: 20),
-                      option(
-                          option: widget.questions[index].option_1,
-                          onTap: () {}),
-                      option(
-                          option: widget.questions[index].option_2,
-                          onTap: () {}),
-                      option(
-                          option: widget.questions[index].option_3,
-                          onTap: () {}),
-                      option(
-                          option: widget.questions[index].option_4,
-                          onTap: () {}),
-                      SizedBox(height: 20),
-                    ],
-                  ),
-                );
-              },
-            ))
-            // Expanded(child: QuestionBuilder()) // <-----------Disabled just for now unitll the error in QuestionBuilder is sorted out
+            Expanded(child: QuestionBuilder(widget.questions)),
           ],
         ),
       ),
@@ -171,94 +119,94 @@ class _QuestionState extends State<Question> {
   }
 }
 
-// class QuestionBuilder extends StatefulWidget {
-//   @override
-//   _QuestionBuilderState createState() => _QuestionBuilderState();
-// }
+class QuestionBuilder extends StatefulWidget {
+  final List<QuestionModel> questions;
 
-// class _QuestionBuilderState extends State<QuestionBuilder> {
-//   List<QuestionModel> questions;
+  const QuestionBuilder(this.questions);
 
-//   @override
-//   void initState() {
-//     super.initState();
-//     questions = _QuestionState().widget.questions;
-//     print(questions[0].question);
-//   }
+  @override
+  _QuestionBuilderState createState() => _QuestionBuilderState();
+}
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return PageView.builder(
-//       itemCount: questions.length ?? 0,
-//       itemBuilder: (context, index) {
-//         return SingleChildScrollView(
-//           child: Column(
-//             children: <Widget>[
-//               Padding(
-//                 padding: const EdgeInsets.symmetric(horizontal: 20),
-//                 child: Row(
-//                   crossAxisAlignment: CrossAxisAlignment.end,
-//                   children: <Widget>[
-//                     Text(
-//                       "Question  ${index + 1} / ",
-//                       style: Styles.questionNumberTextStyle,
-//                     ),
-//                     Text(
-//                       "7",
-//                       style:
-//                           Styles.questionNumberTextStyle.copyWith(fontSize: 20),
-//                     ),
-//                   ],
-//                 ),
-//               ),
-//               SizedBox(height: 20),
-//               Padding(
-//                 padding: const EdgeInsets.symmetric(horizontal: 20),
-//                 child: Text(
-//                   questions[index].question,
-//                   style: Styles.questionTextStyle,
-//                   textAlign: TextAlign.left,
-//                 ),
-//               ),
-//               SizedBox(height: 20),
-//               option(option: questions[index].option_1, onTap: () {}),
-//               option(option: questions[index].option_2, onTap: () {}),
-//               option(option: questions[index].option_3, onTap: () {}),
-//               option(option: questions[index].option_4, onTap: () {}),
-//               SizedBox(height: 20),
-//             ],
-//           ),
-//         );
-//       },
-//     );
-//   }
+class _QuestionBuilderState extends State<QuestionBuilder> {
+  List<QuestionModel> questions;
 
-//   // Widget nextButton(){
-//   //   return
-//   // }
+  @override
+  void initState() {
+    super.initState();
+    questions = widget.questions;
+    print(questions[0].question);
+  }
 
-//   Widget option({String option, Function onTap}) {
-//     bool isSelected = false;
-//     return Padding(
-//       padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-//       child: new Container(
-//         decoration: BoxDecoration(
-//           borderRadius: new BorderRadius.all(new Radius.circular(20.0)),
-//           color: isSelected == false ? Styles.primaryColor : Colors.amber,
-//         ),
-//         child: Material(
-//           color: Colors.transparent,
-//           child: InkWell(
-//             borderRadius: BorderRadius.circular(20.0),
-//             splashColor: Styles.highlightColor,
-//             onTap: onTap,
-//             child: Container(
-//                 alignment: Alignment.centerLeft,
-//                 padding: EdgeInsets.all(20),
-//                 child: Text(option, style: Styles.answerTextStyle)),
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return PageView.builder(
+      itemCount: questions.length ?? 0,
+      itemBuilder: (context, index) {
+        return SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: <Widget>[
+                    Text(
+                      "Question  ${index + 1} / ",
+                      style: Styles.questionNumberTextStyle,
+                    ),
+                    Text(
+                      "7",
+                      style:
+                          Styles.questionNumberTextStyle.copyWith(fontSize: 20),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Text(
+                  questions[index].question,
+                  style: Styles.questionTextStyle,
+                  textAlign: TextAlign.left,
+                ),
+              ),
+              SizedBox(height: 20),
+              option(option: questions[index].option_1, onTap: () {}),
+              option(option: questions[index].option_2, onTap: () {}),
+              option(option: questions[index].option_3, onTap: () {}),
+              option(option: questions[index].option_4, onTap: () {}),
+              SizedBox(height: 20),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget option({String option, Function onTap}) {
+    bool isSelected = false;
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+      child: new Container(
+        decoration: BoxDecoration(
+          borderRadius: new BorderRadius.all(new Radius.circular(20.0)),
+          color: isSelected == false ? Styles.primaryColor : Colors.amber,
+        ),
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            borderRadius: BorderRadius.circular(20.0),
+            splashColor: Styles.highlightColor,
+            onTap: onTap,
+            child: Container(
+                alignment: Alignment.centerLeft,
+                padding: EdgeInsets.all(20),
+                child: Text(option, style: Styles.answerTextStyle)),
+          ),
+        ),
+      ),
+    );
+  }
+}

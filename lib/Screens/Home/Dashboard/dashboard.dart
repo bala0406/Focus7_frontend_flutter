@@ -26,6 +26,7 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      physics: BouncingScrollPhysics(),
       scrollDirection: Axis.vertical,
       dragStartBehavior: DragStartBehavior.start,
       child: Column(children: <Widget>[

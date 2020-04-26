@@ -19,8 +19,8 @@ class Styles {
 
   //Font Size specific for Timer ,Question and Answer in TestView
   static double get timerFontSize => 20;
-  static double get questionNumberFontSize => 24;
-  static double get questionFontSize => 24;
+  static double get questionNumberFontSize => 22;
+  static double get questionFontSize => 22;
   static double get answerFontSize => 18;
 
   //Font Weight
