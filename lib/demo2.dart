@@ -59,7 +59,7 @@ class Demo2 extends StatelessWidget {
                     style: Styles.headlineWhiteTextStyle,
                   )),
                     
-                  ],
+                  ]
                 ),
             ),
           ],
@@ -68,3 +68,4 @@ class Demo2 extends StatelessWidget {
     );
   }
 }
+
