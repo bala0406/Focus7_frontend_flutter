@@ -28,25 +28,37 @@ class Styles {
 
 //Text Styles
   //white text
-  static TextStyle get headlineWhiteTextStyle =>
-      TextStyle(color: primaryWhite, fontSize: headline, fontWeight: fontWeight);
-  static TextStyle get titleWhiteTextStyle => headlineWhiteTextStyle.copyWith(fontSize: title);
-  static TextStyle get normalWhiteTextStyle => headlineWhiteTextStyle.copyWith(fontSize: normal);
-  static TextStyle get smallWhiteTextStyle => headlineWhiteTextStyle.copyWith(fontSize: small);
+  static TextStyle get headlineWhiteTextStyle => TextStyle(
+      color: primaryWhite, fontSize: headline, fontWeight: fontWeight);
+  static TextStyle get titleWhiteTextStyle =>
+      headlineWhiteTextStyle.copyWith(fontSize: title);
+  static TextStyle get normalWhiteTextStyle =>
+      headlineWhiteTextStyle.copyWith(fontSize: normal);
+  static TextStyle get smallWhiteTextStyle =>
+      headlineWhiteTextStyle.copyWith(fontSize: small);
 
   //primary color text
-  static TextStyle get headlineHighlightTextStyle =>
-      TextStyle(color: highlightColor, fontSize: headline, fontWeight: fontWeight);
-  static TextStyle get titleHighlightTextStyle => headlineHighlightTextStyle.copyWith(fontSize: title);
-  static TextStyle get normalHighlightTextStyle => headlineHighlightTextStyle.copyWith(fontSize: normal);
-  static TextStyle get smallHighlightTextStyle => headlineHighlightTextStyle.copyWith(fontSize: small);
+  static TextStyle get headlineHighlightTextStyle => TextStyle(
+      color: highlightColor, fontSize: headline, fontWeight: fontWeight);
+  static TextStyle get titleHighlightTextStyle =>
+      headlineHighlightTextStyle.copyWith(fontSize: title);
+  static TextStyle get normalHighlightTextStyle =>
+      headlineHighlightTextStyle.copyWith(fontSize: normal);
+  static TextStyle get smallHighlightTextStyle =>
+      headlineHighlightTextStyle.copyWith(fontSize: small);
 
   //TextStyle Specific for Timer,Question and Answer in TestView
 
-  static TextStyle get timerTextStyle =>  TextStyle(color: primaryWhite, fontSize: timerFontSize, fontWeight: fontWeight);
-  static TextStyle get questionNumberTextStyle =>  TextStyle(color: highlightColor, fontSize: questionNumberFontSize, fontWeight: fontWeight);
-  static TextStyle get questionTextStyle =>  TextStyle(color: primaryWhite, fontSize: questionFontSize, fontWeight: fontWeight);
-  static TextStyle get answerTextStyle =>  TextStyle(color: primaryWhite, fontSize: answerFontSize, fontWeight: fontWeight);
+  static TextStyle get timerTextStyle => TextStyle(
+      color: primaryWhite, fontSize: timerFontSize, fontWeight: fontWeight);
+  static TextStyle get questionNumberTextStyle => TextStyle(
+      color: highlightColor,
+      fontSize: questionNumberFontSize,
+      fontWeight: fontWeight);
+  static TextStyle get questionTextStyle => TextStyle(
+      color: primaryWhite, fontSize: questionFontSize, fontWeight: fontWeight);
+  static TextStyle get answerTextStyle => TextStyle(
+      color: primaryWhite, fontSize: answerFontSize, fontWeight: fontWeight);
 
   //Icon Size
   static double get normalIconSize => 24;

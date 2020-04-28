@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:focus7/Configurations/styles.dart';
+import 'question_display.dart' as question_display;
 
 class Timer extends StatefulWidget {
   @override
@@ -19,9 +20,14 @@ class _TimerState extends State<Timer> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
     controller =
-        AnimationController(vsync: this, duration: Duration(minutes: 7));
+        AnimationController(vsync: this, duration: Duration(seconds: 3));
     animation = Tween<double>(begin: 0.1, end: 1).animate(controller);
     controller.forward(from: controller.value);
+    controller.addStatusListener((status){
+      if(status == AnimationStatus.completed){
+        
+      }
+    });
   }
 
   @override

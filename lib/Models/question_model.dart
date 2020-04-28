@@ -1,4 +1,3 @@
-
 class QuestionModel {
   // final subjectName;
   final chapterName;
@@ -10,9 +9,14 @@ class QuestionModel {
   final correctOption;
   final mark;
   final hint;
+ bool isOptionOneSelected = false;
+ bool isOptionTwoSelected = false;
+ bool isOptionThreeSelected = false;
+ bool isOptionFourSelected = false;
 
-  QuestionModel.fromJson(Map<String, dynamic> json)
-      : chapterName = json["chapter_name"],
+  QuestionModel.fromJson(
+    Map<String, dynamic> json,
+  )   : chapterName = json["chapter_name"],
         question = json["question"],
         option_1 = json["option_1"],
         option_2 = json["option_2"],
