@@ -2,6 +2,9 @@
 import 'package:flutter/material.dart';
 /////////////////////////////////////////////////////////////
 import 'package:focus7/Configurations/styles.dart';
+import 'package:focus7/Screens/Authentication/sign_in.dart';
+import 'package:focus7/Screens/Home/home.dart';
+import 'package:focus7/Services/auth.dart';
 /////////////////////////////////////////////////////////////
 
 class SettingsIcon extends StatelessWidget {
@@ -10,14 +13,15 @@ class SettingsIcon extends StatelessWidget {
     return IconButton(
       icon: Icon(Icons.settings, color: Styles.highlightColor),
       onPressed: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => Settings()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Settings()));
       },
     );
   }
 }
 
 class Settings extends StatelessWidget {
-
+  AuthService _authService = AuthService();
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -25,11 +29,31 @@ class Settings extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          FittedBox(
-              fit: BoxFit.contain,
-              child: Image.asset("Assets/under_construction.png")),
-              SizedBox(height:20),
-              Text("There is nothing here, you can go back!",style: Styles.titleWhiteTextStyle,)
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 80),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(new Radius.circular(20.0)),
+                color: Styles.errorRed,
+              ),
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(20.0),
+                  onTap: () {
+                    _authService.signOut();
+                   
+                        Navigator.of(context).popUntil(ModalRoute.withName("/"));
+                  },
+                  child: Container(
+                      padding: EdgeInsets.symmetric(vertical: 15),
+                      alignment: Alignment.center,
+                      child:
+                          Text("SignOut", style: Styles.titleWhiteTextStyle)),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

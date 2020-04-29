@@ -8,12 +8,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:761321056320:android:63edd767294b8eadf717a5",
+        "mobilesdk_app_id": "1:761321056320:android:9f820dabdc27a0c3f717a5",
         "android_client_info": {
           "package_name": "com.firelyfreeze.focus7"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "761321056320-t8ioq98f2j19ui9halkgt1o3arle5ga1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.firelyfreeze.focus7",
+            "certificate_hash": "4029feac9cb40cb352d4e37e06661b9c39fa6a8b"
+          }
+        },
         {
           "client_id": "761321056320-9pna744n988grsvnv660if8e6sc26ra2.apps.googleusercontent.com",
           "client_type": 3

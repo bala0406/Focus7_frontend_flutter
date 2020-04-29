@@ -6,12 +6,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 ////////////////////////////////////////////////////////////////////
 import 'package:focus7/Configurations/styles.dart';
 import 'package:focus7/Models/question_model.dart';
+import 'package:focus7/Models/user_model.dart';
 import 'package:focus7/Screens/Test/focus_test_loading.dart';
 import 'package:focus7/Screens/Test/question_display.dart';
 import 'package:focus7/Services/question.dart';
 import 'package:focus7/Widgets/settings.dart';
 import 'package:gradient_text/gradient_text.dart';
 import 'package:loading/loading.dart';
+import 'package:provider/provider.dart';
 ////////////////////////////////////////////////////////////////////
 
 class Dashboard extends StatefulWidget {
@@ -121,9 +123,10 @@ class _DashboardState extends State<Dashboard> {
 class WelcomeUser extends StatelessWidget {
   // final Shader textGradient =
   //     Styles.primaryGradient.createShader(Rect.fromLTWH(0.0, 0.0, 200, 70));
-
+            
   @override
   Widget build(BuildContext context) {
+    User user = Provider.of<User>(context);
     ScreenUtil.init(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -135,7 +138,7 @@ class WelcomeUser extends StatelessWidget {
                 end: Alignment.bottomRight),
             style: Styles.headlineWhiteTextStyle),
         Text(
-          "Bala",
+          user.name,
           style: Styles.headlineWhiteTextStyle,
         ),
       ],

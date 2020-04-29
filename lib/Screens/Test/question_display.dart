@@ -3,6 +3,7 @@ import 'package:focus7/Configurations/styles.dart';
 import 'package:focus7/Models/question_model.dart';
 import 'package:focus7/Screens/Test/test_summary_page.dart';
 import 'package:focus7/Screens/Test/timer.dart';
+import 'package:focus7/Widgets/settings.dart';
 import 'package:gradient_text/gradient_text.dart';
 
 GlobalKey key = GlobalKey();
@@ -16,10 +17,43 @@ class Question extends StatefulWidget {
   _QuestionState createState() => _QuestionState();
 }
 
-class _QuestionState extends State<Question> {
+class _QuestionState extends State<Question> with TickerProviderStateMixin {
+  List<QuestionModel> questions;
+//question builder
+  List<String> get correctOptions {
+    List<String> optionsList = [];
+    for (int i = 0; i < questions.length; i++) {
+      optionsList.add(questions[i].correctOption);
+    }
+    return optionsList;
+  }
+
+  List<String> selectedOptions = [null, null, null, null, null, null, null];
+  PageController _pageController = PageController();
+  //Timer
+  AnimationController _controller;
+  Animation animation;
+
+  String get timerString {
+    Duration duration = _controller.duration * _controller.value;
+    return "${duration.inMinutes}:${(duration.inSeconds % 60).toString().padLeft(2, "0")}";
+  }
+
   @override
   void initState() {
     super.initState();
+    //question builder
+    questions = widget.questions;
+    //Timer
+    _controller =
+        AnimationController(vsync: this, duration: Duration(minutes: 7));
+    animation = Tween<double>(begin: 0.1, end: 1).animate(_controller);
+    _controller.forward(from: _controller.value);
+    _controller.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        calculateMarksandNavigateToSummary();
+      }
+    });
   }
 
   @override
@@ -87,13 +121,415 @@ class _QuestionState extends State<Question> {
       child: Scaffold(
         body: Column(
           children: <Widget>[
-            Timer(),
+            SafeArea(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Expanded(
+                    flex: 4,
+                    child: Transform.translate(
+                      offset: Offset(0, -15), //Size(0,-30).center(Offset.zero)
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 20, left: 20),
+                        child: AnimatedBuilder(
+                            animation: animation,
+                            builder: (context, child) {
+                              return CustomPaint(
+                                  painter: TimerBar(animation: animation));
+                            }),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 20),
+                      child: AnimatedBuilder(
+                          animation: animation,
+                          builder: (context, child) {
+                            return Text(
+                              timerString,
+                              style: Styles.timerTextStyle,
+                              textAlign: TextAlign.center,
+                            );
+                          }),
+                    ),
+                  ),
+                ],
+              ),
+            ),
             SizedBox(height: 40),
-            Expanded(child: QuestionBuilder(questions: widget.questions)),
+            Expanded(
+                child: PageView.builder(
+              physics: BouncingScrollPhysics(),
+              controller: _pageController,
+              itemCount: questions.length ?? 0,
+              itemBuilder: (context, index) {
+                return Scrollbar(
+                  child: SingleChildScrollView(
+                    physics: BouncingScrollPhysics(),
+                    child: Column(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: <Widget>[
+                              Text(
+                                "Question  ${index + 1} / ",
+                                style: Styles.questionNumberTextStyle,
+                              ),
+                              Text(
+                                "7",
+                                style: Styles.questionNumberTextStyle
+                                    .copyWith(fontSize: 20),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: 20),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Text(
+                            questions[index].question,
+                            style: Styles.questionTextStyle,
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
+                        SizedBox(height: 20),
+                        Column(
+                          //options column
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 20),
+                              child: new Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: new BorderRadius.all(
+                                      new Radius.circular(20.0)),
+                                  color: questions[index].isOptionOneSelected ==
+                                          false
+                                      ? Styles.primaryColor
+                                      : Styles.highlightColor,
+                                ),
+                                child: Material(
+                                  color: Colors.transparent,
+                                  child: InkWell(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                    splashColor:
+                                        questions[index].isOptionOneSelected ==
+                                                false
+                                            ? Styles.highlightColor
+                                            : Styles.primaryColor,
+                                    onTap: () {
+                                      if (selectedOptions[index] == null) {
+                                        selectedOptions[index] =
+                                            questions[index].option_1;
+                                      } else {
+                                        selectedOptions[index] = null;
+                                      }
+                                      setState(() {
+                                        questions[index].isOptionOneSelected =
+                                            !questions[index]
+                                                .isOptionOneSelected;
+                                        questions[index].isOptionTwoSelected =
+                                            false;
+                                        questions[index].isOptionThreeSelected =
+                                            false;
+                                        questions[index].isOptionFourSelected =
+                                            false;
+                                      });
+                                    },
+                                    child: Container(
+                                        alignment: Alignment.centerLeft,
+                                        padding: EdgeInsets.all(20),
+                                        child: Text(questions[index].option_1,
+                                            style: Styles.answerTextStyle)),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 20),
+                              child: new Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: new BorderRadius.all(
+                                      new Radius.circular(20.0)),
+                                  color: questions[index].isOptionTwoSelected ==
+                                          false
+                                      ? Styles.primaryColor
+                                      : Styles.highlightColor,
+                                ),
+                                child: Material(
+                                  color: Colors.transparent,
+                                  child: InkWell(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                    splashColor:
+                                        questions[index].isOptionTwoSelected ==
+                                                false
+                                            ? Styles.highlightColor
+                                            : Styles.primaryColor,
+                                    onTap: () {
+                                      if (selectedOptions[index] == null) {
+                                        selectedOptions[index] =
+                                            questions[index].option_2;
+                                      } else {
+                                        selectedOptions[index] = null;
+                                      }
+                                      setState(() {
+                                        questions[index].isOptionOneSelected =
+                                            false;
+                                        questions[index].isOptionTwoSelected =
+                                            !questions[index]
+                                                .isOptionTwoSelected;
+                                        questions[index].isOptionThreeSelected =
+                                            false;
+                                        questions[index].isOptionFourSelected =
+                                            false;
+                                      });
+                                    },
+                                    child: Container(
+                                        alignment: Alignment.centerLeft,
+                                        padding: EdgeInsets.all(20),
+                                        child: Text(questions[index].option_2,
+                                            style: Styles.answerTextStyle)),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 20),
+                              child: new Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: new BorderRadius.all(
+                                      new Radius.circular(20.0)),
+                                  color:
+                                      questions[index].isOptionThreeSelected ==
+                                              false
+                                          ? Styles.primaryColor
+                                          : Styles.highlightColor,
+                                ),
+                                child: Material(
+                                  color: Colors.transparent,
+                                  child: InkWell(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                    splashColor: questions[index]
+                                                .isOptionThreeSelected ==
+                                            false
+                                        ? Styles.highlightColor
+                                        : Styles.primaryColor,
+                                    onTap: () {
+                                      if (selectedOptions[index] == null) {
+                                        selectedOptions[index] =
+                                            questions[index].option_3;
+                                      } else {
+                                        selectedOptions[index] = null;
+                                      }
+                                      setState(() {
+                                        questions[index].isOptionOneSelected =
+                                            false;
+                                        questions[index].isOptionTwoSelected =
+                                            false;
+                                        questions[index].isOptionThreeSelected =
+                                            !questions[index]
+                                                .isOptionThreeSelected;
+                                        questions[index].isOptionFourSelected =
+                                            false;
+                                      });
+                                    },
+                                    child: Container(
+                                        alignment: Alignment.centerLeft,
+                                        padding: EdgeInsets.all(20),
+                                        child: Text(questions[index].option_3,
+                                            style: Styles.answerTextStyle)),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 20),
+                              child: new Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: new BorderRadius.all(
+                                      new Radius.circular(20.0)),
+                                  color:
+                                      questions[index].isOptionFourSelected ==
+                                              false
+                                          ? Styles.primaryColor
+                                          : Styles.highlightColor,
+                                ),
+                                child: Material(
+                                  color: Colors.transparent,
+                                  child: InkWell(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                    splashColor:
+                                        questions[index].isOptionFourSelected ==
+                                                false
+                                            ? Styles.highlightColor
+                                            : Styles.primaryColor,
+                                    onTap: () {
+                                      if (selectedOptions[index] == null) {
+                                        selectedOptions[index] =
+                                            questions[index].option_4;
+                                      } else {
+                                        selectedOptions[index] = null;
+                                      }
+                                      setState(() {
+                                        questions[index].isOptionOneSelected =
+                                            false;
+                                        questions[index].isOptionTwoSelected =
+                                            false;
+                                        questions[index].isOptionThreeSelected =
+                                            false;
+                                        questions[index].isOptionFourSelected =
+                                            !questions[index]
+                                                .isOptionFourSelected;
+                                      });
+                                    },
+                                    child: Container(
+                                        alignment: Alignment.centerLeft,
+                                        padding: EdgeInsets.all(20),
+                                        child: Text(questions[index].option_4,
+                                            style: Styles.answerTextStyle)),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 20),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              //back button
+                              Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                        new Radius.circular(20.0)),
+                                    gradient: Styles.primaryGradient),
+                                child: Material(
+                                  color: Colors.transparent,
+                                  child: InkWell(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                    onTap: () {
+                                      setState(() {
+                                        print("pressed");
+                                        _pageController.animateToPage(index - 1,
+                                            duration:
+                                                Duration(milliseconds: 400),
+                                            curve: Curves.easeOut);
+                                      });
+                                    },
+                                    child: index != 0
+                                        ? Container(
+                                            width: 80,
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: 15),
+                                            alignment: Alignment.center,
+                                            child: Icon(
+                                              Icons.arrow_back,
+                                              color: Styles.primaryColor,
+                                              size: 24,
+                                            ),
+                                          )
+                                        : Container(),
+                                  ),
+                                ),
+                              ),
+                              //next button and finish button at last page
+                              index != questions.length - 1
+                                  ? Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.all(
+                                              new Radius.circular(20.0)),
+                                          gradient: Styles.primaryGradient),
+                                      child: Material(
+                                        color: Colors.transparent,
+                                        child: InkWell(
+                                            borderRadius:
+                                                BorderRadius.circular(20.0),
+                                            onTap: () {
+                                              setState(() {
+                                                print("pressed");
+                                                _pageController.animateToPage(
+                                                    index + 1,
+                                                    duration: Duration(
+                                                        milliseconds: 400),
+                                                    curve: Curves.easeOut);
+                                              });
+                                            },
+                                            child: Container(
+                                              width: 80,
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 15),
+                                              alignment: Alignment.center,
+                                              child: Icon(
+                                                Icons.arrow_forward,
+                                                color: Styles.primaryColor,
+                                              ),
+                                            )),
+                                      ),
+                                    )
+                                  : Container(
+                                      //finish button
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.all(
+                                              new Radius.circular(20.0)),
+                                          gradient: Styles.primaryGradient),
+                                      child: Material(
+                                        color: Colors.transparent,
+                                        child: InkWell(
+                                            borderRadius:
+                                                BorderRadius.circular(20.0),
+                                            onTap: () {
+                                              calculateMarksandNavigateToSummary();
+                                            },
+                                            child: Container(
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 15, horizontal: 50),
+                                              alignment: Alignment.center,
+                                              child: Text(
+                                                "Finish",
+                                                style: Styles
+                                                    .titleWhiteTextStyle
+                                                    .copyWith(
+                                                        color: Styles
+                                                            .primaryColor),
+                                              ),
+                                            )),
+                                      ),
+                                    ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: 40),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            )),
           ],
         ),
       ),
     );
+  }
+
+  void calculateMarksandNavigateToSummary() {
+    int marks = 0;
+    for (int i = 0; i < correctOptions.length; i++) {
+      if (selectedOptions[i] == correctOptions[i]) {
+        marks += 1;
+      }
+    }
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => TestSummary(marks)));
   }
 }
 
@@ -103,9 +539,6 @@ class QuestionBuilder extends StatefulWidget {
   final List<QuestionModel> questions;
 
   const QuestionBuilder({Key key, this.questions}) : super(key: key);
-
-  calculateMarksandNavigateToSummary() =>
-      createState().calculateMarksandNavigateToSummary();
 
   @override
   _QuestionBuilderState createState() => _QuestionBuilderState();
@@ -524,7 +957,7 @@ class _TimerState extends State<Timer> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
     _controller =
-        AnimationController(vsync: this, duration: Duration(minutes: 7));
+        AnimationController(vsync: this, duration: Duration(seconds: 2));
     animation = Tween<double>(begin: 0.1, end: 1).animate(_controller);
     _controller.forward(from: _controller.value);
     _controller.addStatusListener((status) {

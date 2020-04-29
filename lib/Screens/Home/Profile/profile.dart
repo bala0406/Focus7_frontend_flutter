@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:focus7/Configurations/styles.dart';
+import 'package:focus7/Models/user_model.dart';
+import 'package:focus7/Services/auth.dart';
 import 'package:focus7/Widgets/settings.dart';
 import 'package:gradient_text/gradient_text.dart';
+import 'package:provider/provider.dart';
 
 class Profile extends StatelessWidget {
+  
   final GradientText level = GradientText(
     "LEVEL",
     gradient: LinearGradient(
@@ -25,20 +29,22 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    User user = Provider.of<User>(context);
     return SingleChildScrollView(
       physics: BouncingScrollPhysics(),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.only(top: 40),
-            child: Align(alignment: Alignment.centerRight, child: SettingsIcon()),
+            child:
+                Align(alignment: Alignment.centerRight, child: SettingsIcon()),
           ),
           SizedBox(height: 30),
           CircleAvatar(
             radius: 60,
             backgroundColor: Colors.amber,
-            backgroundImage: AssetImage("Assets/ninja_image_png.png"),
+            backgroundImage: user.photo != null ? NetworkImage(user.photo):("Assets/ninja_image_png.png"),
           ),
           SizedBox(height: 15),
           Text(
@@ -89,6 +95,7 @@ class Profile extends StatelessWidget {
             image: "Assets/analytics_icon.svg",
             onTap: () {},
           ),
+          SizedBox(height: 20),
         ],
       ),
     );
