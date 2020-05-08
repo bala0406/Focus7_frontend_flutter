@@ -191,10 +191,13 @@ class _QuestionState extends State<Question> with TickerProviderStateMixin {
                         SizedBox(height: 20),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: Text(
-                            questions[index].question,
-                            style: Styles.questionTextStyle,
-                            textAlign: TextAlign.left,
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              questions[index].question,
+                              style: Styles.questionTextStyle,
+                              textAlign: TextAlign.left,
+                            ),
                           ),
                         ),
                         SizedBox(height: 20),
