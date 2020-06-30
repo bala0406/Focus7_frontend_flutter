@@ -15,11 +15,11 @@ For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
-![Screen shot](/Screenshot_2020-06-30-22-55-14-380_com.firelyfreeze.focus7.jpg)
-![Screen shot](/Screenshot_2020-06-30-22-55-05-914_com.firelyfreeze.focus7.jpg)
-![Screen shot](/Screenshot_2020-06-30-22-55-23-672_com.firelyfreeze.focus7.jpg)
-![Screen shot](/Screenshot_2020-06-30-22-55-39-841_com.firelyfreeze.focus7.jpg)
-![Screen shot](/Screenshot_2020-06-30-22-55-59-691_com.firelyfreeze.focus7.jpg)
-![Screen shot](/Screenshot_2020-06-30-22-56-11-138_com.firelyfreeze.focus7.jpg)
+![Screen shot](/Screenshot_2020-06-30-22-55-14-380_com.firelyfreeze.focus7.jpg|width=100)
+![Screen shot](/Screenshot_2020-06-30-22-55-05-914_com.firelyfreeze.focus7.jpg|width=100)
+![Screen shot](/Screenshot_2020-06-30-22-55-23-672_com.firelyfreeze.focus7.jpg|width=100)
+![Screen shot](/Screenshot_2020-06-30-22-55-39-841_com.firelyfreeze.focus7.jpg|width=100)
+![Screen shot](/Screenshot_2020-06-30-22-55-59-691_com.firelyfreeze.focus7.jpg|width=100)
+![Screen shot](/Screenshot_2020-06-30-22-56-11-138_com.firelyfreeze.focus7.jpg|width=100)
 
 
